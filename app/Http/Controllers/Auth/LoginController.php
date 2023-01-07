@@ -3,11 +3,16 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\PasswordReset;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class LoginController extends Controller
 {
@@ -86,5 +91,58 @@ class LoginController extends Controller
     }
     public function getLogin(){
         return view('auth.login');
+    }
+    public function formForgotPassword(){
+        return view('auth.forgotPassword');
+    }
+    public function postForgotPassword(Request $request){
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|exists:users,email|email',
+        ], [
+            'email.required' => 'Email bắt buộc nhập',
+            'email.exists' => 'Email không tồn tại',
+            'email.email' => 'Email không đúng dịnh dạng',
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
+        }
+        $user = User::where('email',$request->email)->first();
+        if ($user){
+            $passwordReset = PasswordReset::where('email',$request->email)->delete();
+            $token = Str::random(10);
+            DB::table('password_resets')->insert(['email'=>$request->email,'token'=>$token,'created_at'=>Carbon::now()]);
+            Mail::send('email.forgot', ['token'=>$token ], function ($message) use ($user) {
+                $message->to($user->email);
+                $message->subject('Thông báo đổi mật khẩu' );
+            });
+        }else{
+            return 1;
+        }
+    }
+    public function formResetForgot($token){
+        return view('auth.formReset');
+    }
+    public function postResetForgot(Request $request ,$token){
+        $validator = Validator::make($request->all(), [
+            'password' => 'required|min:6|max:30|confirmed',
+            'password_confirmation' => 'required',
+        ], [
+            'password.required' => 'Email bắt buộc nhập',
+            'password.min' => 'Qúa ít ký tự',
+            'password.max' => 'Qúa nhiều ký tự',
+            'password.confirmed'=>'Mật khẩu không trùng khớp',
+            'password_confirmation.required' => 'Xác nhận mật khẩu không được trống',
+        ]);
+//        password_confirmation
+        $passwordReset = PasswordReset::where('token',$token)->first();
+        if ($passwordReset){
+            $user = User::where('email',$passwordReset->email)->first();
+            $user->password = Hash::make($request->password);
+            $user->save();
+            $passwordReset->delete();
+        }else{
+            return redirect()->route('login');
+        }
+        return redirect()->route('login');
     }
 }

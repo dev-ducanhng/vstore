@@ -24,6 +24,8 @@ return new class extends Migration
             $table->integer('trademark_id')->nullable()->comment('id thương hiệu');
             $table->integer('origin_id')->nullable()->comment('id xuất xứ');
             $table->integer('status')->nullable()->comment('0 hết hàng, 1 còn hàng');
+            $table->text('desc');
+            $table->text('photo_gallery');
             $table->integer('payment_methods')->nullable()->comment('1 thanh toán trước,2 thanh toán khi nhận, 3 cả 2');
             $table->timestamps();
         });
