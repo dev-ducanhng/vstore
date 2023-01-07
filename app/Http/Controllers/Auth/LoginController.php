@@ -64,4 +64,9 @@ class LoginController extends Controller
 
         return 'Đăng ký thành công';
     }
+
+    public function getFormLogin()
+    {
+        return view('auth.login');
+    }
 }

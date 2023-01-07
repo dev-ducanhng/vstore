@@ -23,6 +23,7 @@ Route::get('/', function () {
 
 Route::get('/register', [\App\Http\Controllers\Auth\LoginController::class, 'getFormRegister'])->name('register');
 Route::post('/register', [\App\Http\Controllers\Auth\LoginController::class, 'postFormRegister'])->name('post_register');
+Route::get('/login', [\App\Http\Controllers\Auth\LoginController::class, 'getFormLogin'])->name('login');
 
 Route::prefix('products')->group(function () {
     Route::get('/', [\App\Http\Controllers\ProductController::class, 'index'])->name('screens.product.index');

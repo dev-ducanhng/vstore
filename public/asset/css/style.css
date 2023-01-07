@@ -5,13 +5,13 @@ body{
 }
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 /* Firefox */
 input[type=number] {
-  -moz-appearance: textfield;
+    -moz-appearance: textfield;
 }
 img{
     max-width: 100%;
@@ -54,7 +54,7 @@ img{
 }
 .btn-ctn{
     border: 1px solid #D9D9D9;
-box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.016);
+    box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.016);
 }
 .register a.active{
     border: 1px solid #1890FF;
@@ -72,7 +72,7 @@ box-shadow: 0px 2px 0px rgba(0, 0, 0, 0.016);
 .login span{
     text-align: center;
 }
-button[type="submit"].active{
+input[type="submit"].active{
     border: 1px solid #1890FF;
     background-color: #1890FF;
     color: white;
@@ -286,66 +286,66 @@ button[type="submit"].active{
 table {
     border-collapse: collapse;
     width: 100%;
-  }
-  th,
-  td {
+}
+th,
+td {
     padding: 1rem 2rem;
     text-align: center;
 
-  }
-  td{
+}
+td{
     border-bottom: 1px solid #ddd;
-  }
-  tr:last-child td{
+}
+tr:last-child td{
     border-bottom: none;
-  }
-  th {
+}
+th {
     font-weight: normal;
     color: #666;
-  }
-  .dsth th,td{
+}
+.dsth th,td{
     padding: 0.5rem 1.5rem;
-  }
-  .dsth th{
+}
+.dsth th{
     background: #F0F5FF;
-  }
-  .dsth td{
+}
+.dsth td{
     border-bottom: none;
-  }
-  .dsth tr:nth-child(even){
+}
+.dsth tr:nth-child(even){
     background: #F5F5F5;
-  }
-  .char{
+}
+.char{
     background: #E6F7FF;
     border-radius: 12px;
-  }
-  .box-act{
+}
+.box-act{
     background: #FAFAFA;
     border-radius: 16px;
-  }
-  .tab-th li{
+}
+.tab-th li{
     padding: 14px 30px;
     border-bottom: 3px solid #F0F0F0;
-  }
-  .tab-th li.active{
+}
+.tab-th li.active{
     border-bottom: 3px solid #2F54EB;
-  }
-  .tab-th li.active a{
+}
+.tab-th li.active a{
     font-weight: 500;
     color: #1D39C4;
-  }
-  .tab-tbl li{
+}
+.tab-tbl li{
     padding: 14px 30px;
     border-bottom: 3px solid #F0F0F0;
-  }
-  .tab-tbl li.active{
+}
+.tab-tbl li.active{
     border-bottom: 3px solid #2F54EB;
-  }
-  .tab-tbl li.active a{
+}
+.tab-tbl li.active a{
     font-weight: 500;
     color: #1D39C4;
-  }
-  .pagination li{
+}
+.pagination li{
     width: 32px;
     height: 32px;
     display: flex;
@@ -353,27 +353,27 @@ table {
     align-items: center;
     border: 1px solid #D9D9D9;
     border-radius: 2px;
-  }
-  .pagination li:hover{
+}
+.pagination li:hover{
     border: 1px solid #1890FF;
     transition: 0.5s all;
     cursor: pointer;
-  }
-  .pagination li:hover a{
+}
+.pagination li:hover a{
     color:  #1890FF;
     transition: 0.5s all;
-  }
-  .pagination li.active{
+}
+.pagination li.active{
     border: 1px solid #1890FF;
-  }
-  .pagination li.active a{
+}
+.pagination li.active a{
     color: #1890FF;
-  }
+}
 
-  .toggle-pill input[type="checkbox"] {
+.toggle-pill input[type="checkbox"] {
     display: none;
-  }
-  .toggle-pill input[type="checkbox"] + label {
+}
+.toggle-pill input[type="checkbox"] + label {
     display: block;
     position: relative;
     width: 40px;
@@ -387,8 +387,8 @@ table {
     -ms-user-select: none;
     -webkit-transition: background 0.1s ease-in-out;
     transition: background 0.1s ease-in-out;
-  }
-  .toggle-pill input[type="checkbox"] + label:before {
+}
+.toggle-pill input[type="checkbox"] + label:before {
     content: "";
     display: block;
     width: 16px;
@@ -402,72 +402,72 @@ table {
     transition: all 0.2s ease-in-out;
     -webkit-transform: rotate(90deg);
     transform: rotate(90deg);
-  }
-  .toggle-pill input[type="checkbox"]:checked + label:before {
+}
+.toggle-pill input[type="checkbox"]:checked + label:before {
     box-shadow: -2px 0px 5px rgba(0, 0, 0, 0.2);
     left: 22px;
     -webkit-transform: rotate(295deg);
     transform: rotate(295deg);
-  }
-  .toggle-pill input[type="checkbox"]:checked + label {
+}
+.toggle-pill input[type="checkbox"]:checked + label {
     background: #2F54EB;
-  }
-  .box-more{
+}
+.box-more{
     max-height: 0;
     overflow: hidden;
     transition: 0.5s all;
-  }
-  svg{
+}
+svg{
     transform: rotate(0deg);
     transition: 0.5s all;
-  }
-  .scroll-more{
+}
+.scroll-more{
     max-height: 800px;
     overflow-y: auto;
     transition: 0.5s all;
-  }
-  .rotate{
+}
+.rotate{
     transition: 0.5s all;
     transform: rotate(180deg);
-  }
-  .process::after{
+}
+.process::after{
     content: '';
     position: absolute;
     width: 20px;
     border-radius: 100px;
     height: 8px;
     background-color: #2F54EB;
-  }
-  .tab-side li{
+}
+.tab-side li{
     border-left: 4px solid #f5f5f5;
     padding: 12px 0 12px 20px;
-  }
-  .tab-side li:hover a{
+}
+.tab-side li:hover a{
     color: #096DD9;
     transition: 0.5s all;
-  }
-  .tab-side li a{
+}
+.tab-side li a{
     color: rgba(0, 0, 0, 0.85);
-  }
-  .tab-side li.active{
+}
+.tab-side li.active{
     border-color: #096DD9;
-  }
-  .select2-container{
+}
+.select2-container{
     width: 100% !important;
 
-  }
-  .select2-container .select2-selection--single{
+}
+.select2-container .select2-selection--single{
     height: 38px !important;
-  }
-  .select2-container--default .select2-selection--single .select2-selection__rendered{
+}
+.select2-container--default .select2-selection--single .select2-selection__rendered{
     font-size: 16px !important;
     padding-top: 4px !important;
-  }
-  .select2-container--default .select2-selection--single{
+}
+.select2-container--default .select2-selection--single{
     border-radius: 2px !important;
     border-color: #D9D9D9!important;
-  }
-  .select2-container--default .select2-selection--single .select2-selection__arrow {
+}
+.select2-container--default .select2-selection--single .select2-selection__arrow {
     height: 38px !important;
 
 }
@@ -478,8 +478,8 @@ table {
     }
     th,
     td {
-      padding: 10px 6px !important;
-      text-align: center;
+        padding: 10px 6px !important;
+        text-align: center;
     }
     .menu-mobile{
         position: fixed;
@@ -538,13 +538,13 @@ table {
     .nav-menu-mb li:hover > .nav-sub-menu-mb{
         margin-left: 10px;
         background-color: unset!important;
-   }
-   .nav-menu-mb li a svg{
-    transform: rotate(0deg);
-    transition: 0.5s all;
-   }
-   .nav-menu-mb li:hover a svg{
-    transform: rotate(180deg);
-    transition: 0.5s all;
-}
+    }
+    .nav-menu-mb li a svg{
+        transform: rotate(0deg);
+        transition: 0.5s all;
+    }
+    .nav-menu-mb li:hover a svg{
+        transform: rotate(180deg);
+        transition: 0.5s all;
+    }
 }
