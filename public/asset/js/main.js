@@ -8,7 +8,7 @@ $(document).ready(function() {
     <path d="M7.92897 10.0012C7.86719 10.0012 7.80629 9.99839 7.74594 9.99286L6.80272 10.9361C7.37003 11.1533 7.98812 11.2016 8.58228 11.0751C9.17643 10.9485 9.72122 10.6526 10.1508 10.2231C10.5803 9.7935 10.8763 9.24871 11.0028 8.65455C11.1293 8.0604 11.0811 7.4423 10.8638 6.875L9.92058 7.81821C9.92612 7.87857 9.92897 7.93946 9.92897 8.00125C9.92911 8.26393 9.87748 8.52407 9.77702 8.76678C9.67656 9.0095 9.52925 9.23003 9.3435 9.41578C9.15776 9.60152 8.93722 9.74884 8.69451 9.8493C8.45179 9.94976 8.19166 10.0014 7.92897 10.0012Z" fill="black" fill-opacity="0.45"/>
     `
 
-    $('.btn-ctn').attr('href','javascript:void(0)')
+    $('.btn-ctn').attr('href', 'javascript:void(0)')
     // $('.tab-register li').on('click', function(){
     //     $('.tab-register li').removeClass('active');
     //     $(this).addClass('active');
@@ -41,18 +41,18 @@ $(document).ready(function() {
     //         }, 2000);
     //     }
     // })
-    $('.check-item .item').on('click', function(){
+    $('.check-item .item').on('click', function () {
         $(this).addClass('active');
         $('.btn-ctn').addClass('active')
         checkRegister()
     })
-    $('.password .icon').on('click', function(){
+    $('.password .icon').on('click', function () {
 
-        if($('.pass input').attr('type') == 'password'){
+        if ($('.pass input').attr('type') == 'password') {
             $('.pass input').prop("type", "text");
             $('.password .icon').html(svgShowPass)
 
-        }else{
+        } else {
             $('.pass input').prop("type", "password")
             $('.password .icon').html(svgHidePass)
         }
@@ -72,16 +72,40 @@ $(document).ready(function() {
         }
     }
 
+    let arrImage = [];
 
-    $('.giayDK').on('click', function(){
-            let input = document.createElement('input');
-            input.type = 'file';
-            input.onchange = _ => {
-                var files = Array.from(input.files);
-                const reader = new FileReader();
+    function render(arrImage) {
+        const html = arrImage.map((item, index) => {
+            return `<div class="item w-[102px] h-[102px] flex justify-center items-center relative">
+                <div class="over-lay"></div>
+                <svg width="16" height="16" data-index="${index}"  class="deleteImg cursor-pointer" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M5.28544 2.14118H5.14258C5.22115 2.14118 5.28544 2.0769 5.28544 1.99833V2.14118H10.714V1.99833C10.714 2.0769 10.7783 2.14118 10.8569 2.14118H10.714V3.4269H11.9997V1.99833C11.9997 1.36797 11.4872 0.855469 10.8569 0.855469H5.14258C4.51222 0.855469 3.99972 1.36797 3.99972 1.99833V3.4269H5.28544V2.14118ZM14.2854 3.4269H1.71401C1.39794 3.4269 1.14258 3.68225 1.14258 3.99833V4.56975C1.14258 4.64833 1.20686 4.71261 1.28544 4.71261H2.36401L2.80508 14.0519C2.83365 14.6608 3.33722 15.1412 3.94615 15.1412H12.0533C12.664 15.1412 13.1658 14.6626 13.1944 14.0519L13.6354 4.71261H14.714C14.7926 4.71261 14.8569 4.64833 14.8569 4.56975V3.99833C14.8569 3.68225 14.6015 3.4269 14.2854 3.4269ZM11.9158 13.8555H4.08365L3.65151 4.71261H12.3479L11.9158 13.8555Z" fill="white"/>
+</svg>
+            <img src="${item}" class="w-full h-full"></div>`;
+        }).join("")
+        $('.file-name').html(html);
+        document.getElementById('countImage').innerHTML = arrImage.length +
+            '/9';
 
-                return new Promise(resolve => {
-                  reader.onload = ev => {
+        document.getElementById('photo_gallery').value = JSON.stringify(arrImage);
+        document.querySelectorAll('.deleteImg').forEach(item => {
+            const {index} = item.dataset;
+            item.addEventListener('click', () => {
+                arrImage = arrImage.filter((item1, index1) => index1 !== +index);
+                render(arrImage);
+            })
+        })
+    }
+
+    $('.giayDK').on('click', function () {
+        let input = document.createElement('input');
+        input.type = 'file';
+        input.onchange = _ => {
+            var files = Array.from(input.files);
+            const reader = new FileReader();
+
+            return new Promise(resolve => {
+                reader.onload = ev => {
                     resolve(ev.target.result)
                     $('.file-name').append(`<div class="item w-[104px] h-[104px] flex justify-center items-center relative">
                         <div class="over-lay"></div>
@@ -89,12 +113,12 @@ $(document).ready(function() {
 <path d="M5.28544 2.14118H5.14258C5.22115 2.14118 5.28544 2.0769 5.28544 1.99833V2.14118H10.714V1.99833C10.714 2.0769 10.7783 2.14118 10.8569 2.14118H10.714V3.4269H11.9997V1.99833C11.9997 1.36797 11.4872 0.855469 10.8569 0.855469H5.14258C4.51222 0.855469 3.99972 1.36797 3.99972 1.99833V3.4269H5.28544V2.14118ZM14.2854 3.4269H1.71401C1.39794 3.4269 1.14258 3.68225 1.14258 3.99833V4.56975C1.14258 4.64833 1.20686 4.71261 1.28544 4.71261H2.36401L2.80508 14.0519C2.83365 14.6608 3.33722 15.1412 3.94615 15.1412H12.0533C12.664 15.1412 13.1658 14.6626 13.1944 14.0519L13.6354 4.71261H14.714C14.7926 4.71261 14.8569 4.64833 14.8569 4.56975V3.99833C14.8569 3.68225 14.6015 3.4269 14.2854 3.4269ZM11.9158 13.8555H4.08365L3.65151 4.71261H12.3479L11.9158 13.8555Z" fill="white"/>
 </svg>
                     <img src="${ev.target.result}" class="w-full h-full"></img></div>`)
-                  }
-                  reader.readAsDataURL(files[0])
-                  console.log($('.deleteImg'))
-                })
-              };
-            input.click();
+                }
+                reader.readAsDataURL(files[0])
+                console.log($('.deleteImg'))
+            })
+        };
+        input.click();
     })
 
     $('.img-info').on('click', function(){
@@ -105,74 +129,67 @@ $(document).ready(function() {
             const reader = new FileReader();
 
             return new Promise(resolve => {
-              reader.onload = ev => {
-                resolve(ev.target.result)
-                $('.file-name').append(`<div class="item w-[152px] h-[152px] flex justify-center items-center relative">
-                    <div class="over-lay"></div>
-                    <svg width="16" height="16" class="deleteImg cursor-pointer" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M5.28544 2.14118H5.14258C5.22115 2.14118 5.28544 2.0769 5.28544 1.99833V2.14118H10.714V1.99833C10.714 2.0769 10.7783 2.14118 10.8569 2.14118H10.714V3.4269H11.9997V1.99833C11.9997 1.36797 11.4872 0.855469 10.8569 0.855469H5.14258C4.51222 0.855469 3.99972 1.36797 3.99972 1.99833V3.4269H5.28544V2.14118ZM14.2854 3.4269H1.71401C1.39794 3.4269 1.14258 3.68225 1.14258 3.99833V4.56975C1.14258 4.64833 1.20686 4.71261 1.28544 4.71261H2.36401L2.80508 14.0519C2.83365 14.6608 3.33722 15.1412 3.94615 15.1412H12.0533C12.664 15.1412 13.1658 14.6626 13.1944 14.0519L13.6354 4.71261H14.714C14.7926 4.71261 14.8569 4.64833 14.8569 4.56975V3.99833C14.8569 3.68225 14.6015 3.4269 14.2854 3.4269ZM11.9158 13.8555H4.08365L3.65151 4.71261H12.3479L11.9158 13.8555Z" fill="white"/>
-</svg>
-                <img src="${ev.target.result}" class="w-full h-full"></img></div>`)
-              }
-              reader.readAsDataURL(files[0])
-              console.log($('.deleteImg'))
+                reader.onload = ev => {
+                    resolve(ev.target.result)
+                    arrImage.push(ev.target.result);
+                    render(arrImage);
+
+                }
+                reader.readAsDataURL(files[0])
             })
-          };
+        };
         input.click();
-})
+    })
 
-$('.img-gt-info').on('click', function(){
-    let input = document.createElement('input');
-    input.type = 'file';
-    input.onchange = _ => {
-        var files = Array.from(input.files);
-        const reader = new FileReader();
+    $('.img-gt-info').on('click', function () {
+        let input = document.createElement('input');
+        input.type = 'file';
+        input.onchange = _ => {
+            var files = Array.from(input.files);
+            const reader = new FileReader();
 
-        return new Promise(resolve => {
-          reader.onload = ev => {
-            resolve(ev.target.result)
-            $('.file-name').append(`<div class="item w-[102px] h-[102px] flex justify-center items-center relative">
-                <div class="over-lay"></div>
-                <svg width="16" height="16" class="deleteImg cursor-pointer" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M5.28544 2.14118H5.14258C5.22115 2.14118 5.28544 2.0769 5.28544 1.99833V2.14118H10.714V1.99833C10.714 2.0769 10.7783 2.14118 10.8569 2.14118H10.714V3.4269H11.9997V1.99833C11.9997 1.36797 11.4872 0.855469 10.8569 0.855469H5.14258C4.51222 0.855469 3.99972 1.36797 3.99972 1.99833V3.4269H5.28544V2.14118ZM14.2854 3.4269H1.71401C1.39794 3.4269 1.14258 3.68225 1.14258 3.99833V4.56975C1.14258 4.64833 1.20686 4.71261 1.28544 4.71261H2.36401L2.80508 14.0519C2.83365 14.6608 3.33722 15.1412 3.94615 15.1412H12.0533C12.664 15.1412 13.1658 14.6626 13.1944 14.0519L13.6354 4.71261H14.714C14.7926 4.71261 14.8569 4.64833 14.8569 4.56975V3.99833C14.8569 3.68225 14.6015 3.4269 14.2854 3.4269ZM11.9158 13.8555H4.08365L3.65151 4.71261H12.3479L11.9158 13.8555Z" fill="white"/>
-</svg>
-            <img src="${ev.target.result}" class="w-full h-full"></img></div>`)
-          }
-          reader.readAsDataURL(files[0])
-          console.log($('.deleteImg'))
-        })
-      };
-    input.click();
-})
-   $('.btnHD').on('click', function () {
+            return new Promise(resolve => {
+                reader.onload = ev => {
+                    resolve(ev.target.result)
+                    arrImage.push(ev.target.result);
+                    render(arrImage);
+                }
+                reader.readAsDataURL(files[0])
+            })
+        };
+        input.click();
+    })
+    $('.btnHD').on('click', function () {
         $('.modal-hd').toggleClass('show-modal');
-   })
-   function coundownXT(){
-    var timer2 = "2:00";
-    var interval = setInterval(function() {
-        var timer = timer2.split(':');
-        var minutes = parseInt(timer[0], 10);
-        var seconds = parseInt(timer[1], 10);
-        --seconds;
-        minutes = (seconds < 0) ? --minutes : minutes;
-        if (minutes < 0) clearInterval(interval);
-        seconds = (seconds < 0) ? 59 : seconds;
-        seconds = (seconds < 10) ? '0' + seconds : seconds;
+    })
 
-        $('.smsXT input[type="button"]').replaceWith(`<input type="button" class="disabled btnXT outline-none bg-primary transition-all duration-200 rounded-sm py-2 px-3 w-full text-center text-[#FFFFFF]" value="Nhậ mã xác thực qua SMS (${minutes + ':' + seconds})" disabled></input>`)
-        timer2 = minutes + ':' + seconds;
-        console.log(timer2)
-        if(timer2 == "0:00"){
-            clearInterval(interval);
-            $('.smsXT input[type="button"]').replaceWith(`<input type="button" class="btnXT cursor-pointer outline-none bg-primary transition-all duration-200 rounded-sm py-2 px-3 w-full text-center text-[#FFFFFF] hover:opacity-70" value="Nhận mã xác thực qua SMS" ></input>`)
-            coundownXT();
-        }
-    }, 1000);
-   }
+    function coundownXT() {
+        var timer2 = "2:00";
+        var interval = setInterval(function () {
+            var timer = timer2.split(':');
+            var minutes = parseInt(timer[0], 10);
+            var seconds = parseInt(timer[1], 10);
+            --seconds;
+            minutes = (seconds < 0) ? --minutes : minutes;
+            if (minutes < 0) clearInterval(interval);
+            seconds = (seconds < 0) ? 59 : seconds;
+            seconds = (seconds < 10) ? '0' + seconds : seconds;
+
+            $('.smsXT input[type="button"]').replaceWith(`<input type="button" class="disabled btnXT outline-none bg-primary transition-all duration-200 rounded-sm py-2 px-3 w-full text-center text-[#FFFFFF]" value="Nhậ mã xác thực qua SMS (${minutes + ':' + seconds})" disabled></input>`)
+            timer2 = minutes + ':' + seconds;
+            console.log(timer2)
+            if (timer2 == "0:00") {
+                clearInterval(interval);
+                $('.smsXT input[type="button"]').replaceWith(`<input type="button" class="btnXT cursor-pointer outline-none bg-primary transition-all duration-200 rounded-sm py-2 px-3 w-full text-center text-[#FFFFFF] hover:opacity-70" value="Nhận mã xác thực qua SMS" ></input>`)
+                coundownXT();
+            }
+        }, 1000);
+    }
+
     $('.smsXT input[type="button"]').on('click', function () {
         coundownXT()
-   })
-   $('.btn-sub-sign').on('click', function () {
+    })
+    $('.btn-sub-sign').on('click', function () {
         $('.modal-success').toggleClass('show-modal')
    })
 
@@ -210,7 +227,7 @@ $('.img-gt-info').on('click', function(){
     $('.btn-log').prop('disabled', true);
     $('#form-log').on('change', function (e) {
         e.preventDefault();
-        if(e.target.value != ''){
+        if(e.target.value != '' && e.target.checked){
             $('.btn-log').prop('disabled', false);
             $('.btn-log').addClass('active');
         }else{

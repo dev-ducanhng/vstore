@@ -21,6 +21,12 @@ Route::get('/login',[\App\Http\Controllers\Auth\LoginController::class,'getLogin
 Route::post('/login',[\App\Http\Controllers\Auth\LoginController::class,'postLogin']);
 
 
-
 Route::get('/register', [\App\Http\Controllers\Auth\LoginController::class, 'getFormRegister'])->name('register');
 Route::post('/register', [\App\Http\Controllers\Auth\LoginController::class, 'postFormRegister'])->name('post_register');
+
+Route::prefix('products')->group(function () {
+    Route::get('/', [\App\Http\Controllers\ProductController::class, 'index'])->name('screens.product.index');
+    Route::get('/create/{type?}', [\App\Http\Controllers\ProductController::class, 'create'])->name('screens.product.create');
+    Route::post('/create/{type?}', [\App\Http\Controllers\ProductController::class, 'store'])->name('screens.product.store');
+
+});
