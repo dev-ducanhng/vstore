@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -63,5 +64,27 @@ class LoginController extends Controller
         $user->save();
 
         return 'Đăng ký thành công';
+    }
+
+    public function postLogin(Request $request){
+
+        $request->validate([
+            'email' => 'required',
+            'password' => 'required'
+        ]);
+//        return 1;
+        $credentials = request(['email', 'password']);
+        if (Auth::attempt($credentials)){
+            return 'đăng nhập thành công';
+        }else if(Auth::attempt(['phone_number' => $request->email, 'password' => $request->password])){
+            return 'đăng nhập thành công';
+        }else{
+            return redirect()->route('login')->with('mes','Tài khoản hoặc mật khẩu không chính xác');
+        }
+        ;
+
+    }
+    public function getLogin(){
+        return view('auth.login');
     }
 }

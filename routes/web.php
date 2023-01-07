@@ -17,8 +17,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 //Route::get()
-//Route::get('/login',[\App\Http\Controllers\AuthController::class,'getLogin']);
-//Route::post('/login',[\App\Http\Controllers\AuthController::class,'postLogin']);
+Route::get('/login',[\App\Http\Controllers\Auth\LoginController::class,'getLogin'])->name('login');
+Route::post('/login',[\App\Http\Controllers\Auth\LoginController::class,'postLogin']);
 
 
 
